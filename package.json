@@ -1,5 +1,5 @@
 {
-  "name": "p5-starter",
+  "name": "codingDrill02",
   "version": "1.0.0",
   "description": "Starter for p5.js with webpack4 and es6",
   "scripts": {

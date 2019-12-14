@@ -13,17 +13,27 @@ function Circle(x, y, p5) {
   this.r = 1;
   this.growing = true;
   this.p5 = p5;
-  this.growingSpeed = p5.random(10) / 50;
-  this.red = p5.random(0, 255);
-  this.green = p5.random(0, 255);
-  this.blue = p5.random(0, 255);
+  this.growingSpeed = p5.random(10) / 40;
+
+  const ran = Math.floor(p5.random(0, 100))
+  if (ran < 25) {
+  this.red = p5.random(0, 155);
+  this.green = p5.random(0, 155);
+  this.blue = p5.random(0, 155);
+  this.applyFill = true
+  } else {
+    this.red = 255;
+    this.green = 255;
+    this.blue = 255;
+    this.applyFill = false  
+  }
 
   this.grow = function() {
     if (this.growing) {
       this.r += this.growingSpeed;
 
-      // if (this.r >= 15) {
-      //   this.r = 15;
+      // if (this.r >= 10) {
+      //   this.r = 10;
       //   this.growing = false;
       // } 
     }
@@ -31,9 +41,14 @@ function Circle(x, y, p5) {
 
   this.show = function() {
     this.p5.stroke(this.red, this.green, this.blue);
-    this.p5.noFill();
 
-    this.p5.strokeWeight(2);
+    if (this.applyFill) {
+      this.p5.fill(this.red, this.green, this.blue);
+    } else {
+      this.p5.noFill();
+    }
+
+    this.p5.strokeWeight(0.5);
     this.p5.ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 
@@ -79,7 +94,7 @@ window.onload = function () {
     let img = {};
     p5.preload = () => {
       console.log('preload')
-      img = p5.loadImage('./assets/2020.png');
+      img = p5.loadImage('./assets/cinnamon.png');
     }
     p5.setup = () => {
       const canvas = p5.createCanvas(width, height)
